@@ -61,6 +61,5 @@ namespace BookLoan.API.Controllers
             await _service.Delete(id);
             return NoContent();
         }
-        
     }
 }

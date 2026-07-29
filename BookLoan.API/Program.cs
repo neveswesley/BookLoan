@@ -2,6 +2,8 @@ using BookLoan.API.Database;
 using BookLoan.API.Interfaces;
 using BookLoan.API.Repository;
 using BookLoan.API.Services;
+using BookLoan.API.Validations.Book;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,7 @@ builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateBookValidation>();
 
 var app = builder.Build();
 

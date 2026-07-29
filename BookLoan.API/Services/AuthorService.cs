@@ -2,6 +2,7 @@
 using BookLoan.API.Entities;
 using BookLoan.API.Interfaces;
 using BookLoan.API.Repository;
+using BookLoan.API.Validations.Book;
 
 namespace BookLoan.API.Services;
 
@@ -14,9 +15,9 @@ public class AuthorService : IAuthorService
         _repository = repository;
     }
 
-    public async Task<Guid> Create(string name, string biography)
+    public async Task<Guid> Create(CreateAuthorDto dto)
     {
-        var author = new Author(name, biography);
+        var author = new Author(dto.Name,dto.Biography);
         await _repository.Create(author);
         return author.Id;
     }

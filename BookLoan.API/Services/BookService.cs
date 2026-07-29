@@ -6,7 +6,6 @@ namespace BookLoan.API.Services;
 
 public class BookService : IBookService
 {
-    
     private readonly IBookRepository _bookRepository;
 
     public BookService(IBookRepository bookRepository)

@@ -21,7 +21,7 @@ namespace BookLoan.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create(CreateAuthorDto dto)
         {
-            var id = await _service.Create(dto.Name, dto.Biography);
+            var id = await _service.Create(dto);
             return CreatedAtAction(
                 nameof(GetById),
                 new { id },
