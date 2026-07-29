@@ -36,7 +36,11 @@ public class AuthorService : IAuthorService
         return authors.Select(a => new AuthorResponseDto
         {
             Name = a.Name,
-            Biography = a.Biography
+            Biography = a.Biography,
+            Books = a.Books.Select(b=> new AuthorBooksResponseDto
+            {
+                Title = b.Title
+            }).ToList()
         }).ToList();
     }
 

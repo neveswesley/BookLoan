@@ -41,7 +41,7 @@ public class AuthorRepository : IAuthorRepository
 
     public async Task<List<Author>> GetAll()
     {
-        return await _context.Author.ToListAsync();
+        return await _context.Author.Include(a=>a.Books).ToListAsync();
     }
     
 }
