@@ -14,10 +14,11 @@ public class AuthorService : IAuthorService
         _repository = repository;
     }
 
-    public async Task Create(string name, string biography)
+    public async Task<Guid> Create(string name, string biography)
     {
         var author = new Author(name, biography);
         await _repository.Create(author);
+        return author.Id;
     }
 
     public async Task<AuthorResponseDto?> GetById(Guid authorId)
