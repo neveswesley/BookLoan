@@ -44,6 +44,13 @@ namespace BookLoan.API.Controllers
             var result = await _service.Update(id, dto);
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            await _service.Delete(id);
+            return Ok();
+        }
         
     }
 }

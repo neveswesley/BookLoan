@@ -48,4 +48,9 @@ public class BookService : IBookService
         await _bookRepository.Update(bookId);
         return book.Id;
     }
+
+    public async Task Delete(Guid bookId)
+    {
+        await _bookRepository.Delete(bookId);
+    }
 }

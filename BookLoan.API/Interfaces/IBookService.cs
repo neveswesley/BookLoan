@@ -9,4 +9,5 @@ public interface IBookService
     Task<List<BookResponseDto>> GetAll();
     Task<BookResponseDto> GetById(Guid id);
     Task<Guid> Update(Guid bookId, UpdateBookDto dto);
+    Task Delete(Guid bookId);
 }
