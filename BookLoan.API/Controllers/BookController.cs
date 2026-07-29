@@ -37,6 +37,13 @@ namespace BookLoan.API.Controllers
             var result = await _service.GetById(id);
             return Ok(result);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, UpdateBookDto dto)
+        {
+            var result = await _service.Update(id, dto);
+            return Ok(result);
+        }
         
     }
 }

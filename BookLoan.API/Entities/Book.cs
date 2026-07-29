@@ -16,5 +16,10 @@ public class Book : BaseEntity
         Title = title;
         AuthorId = authorId;
     }
+
+    public void UpdateBook(string title)
+    {
+        Title = title;
+    }
     
 }

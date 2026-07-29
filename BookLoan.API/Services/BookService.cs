@@ -40,4 +40,12 @@ public class BookService : IBookService
             Author = book.Author.Name
         };
     }
+
+    public async Task<Guid> Update(Guid bookId, UpdateBookDto dto)
+    {
+        var book = await _bookRepository.GetById(bookId);
+        book.UpdateBook(dto.Title);
+        await _bookRepository.Update(bookId);
+        return book.Id;
+    }
 }

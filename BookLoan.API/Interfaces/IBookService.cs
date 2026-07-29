@@ -8,4 +8,5 @@ public interface IBookService
     Task<Guid> Create(CreateBookDto dto);
     Task<List<BookResponseDto>> GetAll();
     Task<BookResponseDto> GetById(Guid id);
+    Task<Guid> Update(Guid bookId, UpdateBookDto dto);
 }

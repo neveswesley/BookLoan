@@ -30,4 +30,11 @@ public class BookRepository : IBookRepository
     {
         return await _context.Book.Include(b=>b.Author).FirstOrDefaultAsync(b=>b.Id == bookId);
     }
+
+    public async Task Update(Guid bookid)
+    {
+        var book = await _context.Book.FirstOrDefaultAsync(b => b.Id == bookid);
+        _context.Update(book);
+        await _context.SaveChangesAsync();
+    }
 }
