@@ -22,8 +22,11 @@ namespace BookLoan.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create(CreateBookDto dto)
         {
-            await _service.Create(dto);
-            return Created();
+            var id = await _service.Create(dto);
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id },
+                null);
         }
 
         [HttpGet]

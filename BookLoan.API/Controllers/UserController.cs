@@ -17,11 +17,13 @@ namespace BookLoan.API.Controllers
             _userService = userService;
         }
 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserDto dto)
         {
-            await _userService.Create(dto);
-            return Created();
+            var result = await _userService.Create(dto);
+            return Created(string.Empty, result);
         }
         
     }
