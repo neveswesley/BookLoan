@@ -25,7 +25,31 @@ public class BookLoanRepository : IBookLoanRepository
     {
         return await _context.
             BookLoans.
-            Where(bl => bl.IsActive == true).Include(bl => bl.Book).ThenInclude(bl=>bl.Author).Include(bl=>bl.User)
-            .ToListAsync();
+            Where(bl => bl.IsActive == true).
+            Include(bl => bl.Book).ThenInclude(bl=>bl.Author).
+            Include(bl=>bl.User).
+            ToListAsync();
+    }
+
+    public async Task<List<Entities.BookLoan>> GetBookLoanByUserId(Guid userId)
+    {
+        return await _context.BookLoans.
+            Include(bl=> bl.Book).ThenInclude(bl => bl.Author).
+            Include(bl=>bl.User).
+            Where(bl=> bl.UserId == userId && bl.IsActive == true).
+            ToListAsync();
+    }
+    
+    public async Task<Entities.BookLoan> GetBookLoanById(Guid bookLoanId)
+    {
+        var bookLoan = await _context.BookLoans.FirstOrDefaultAsync(bl => bl.Id == bookLoanId);
+        return bookLoan;
+    }
+
+    public async Task ReturnBookLoan(Guid bookLoanId)
+    {
+       var bookLoan = await _context.BookLoans.FirstOrDefaultAsync(bl => bl.Id == bookLoanId);
+       _context.BookLoans.Update(bookLoan);
+       await _context.SaveChangesAsync();
     }
 }

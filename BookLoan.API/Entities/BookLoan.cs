@@ -22,4 +22,10 @@ public class BookLoan : BaseEntity
         LoanDate = DateTime.UtcNow;
         ReturnDate = LoanDate.AddDays(3);
     }
+
+    public void ReturnBook()
+    {
+        IsActive = false;
+    }
+    
 }

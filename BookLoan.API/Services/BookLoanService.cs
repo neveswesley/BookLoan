@@ -50,4 +50,34 @@ public class BookLoanService : IBookLoanService
             ReturnDate = bl.ReturnDate,
         }).ToList();
     }
+
+    public async Task<List<BookLoanResponseDto>> GetBookLoanByUserId(Guid userId)
+    {
+        var bookLoans = await _bookLoanRepository.GetBookLoanByUserId(userId);
+
+        return bookLoans.Select(bl => new BookLoanResponseDto()
+        {
+            Book = new BookResponseDto()
+            {
+                Title = bl.Book.Title,
+                Author = bl.Book.Author.Name
+            },
+            User = new UserResponseDto()
+            {
+                Name = bl.User.Name
+            },
+            LoanDate = bl.LoanDate,
+            ReturnDate = bl.ReturnDate
+        }).ToList();
+    }
+
+    public async Task ReturnBook(Guid bookLoanId)
+    {
+        var bookLoan = await _bookLoanRepository.GetBookLoanById(bookLoanId);
+        var book = await _bookRepository.GetById(bookLoan.BookId);
+        bookLoan.ReturnBook();
+        book.ReturnBook();
+        _bookLoanRepository.ReturnBookLoan(bookLoanId);
+        _bookRepository.ReturnBook(bookLoan.BookId);
+    }
 }

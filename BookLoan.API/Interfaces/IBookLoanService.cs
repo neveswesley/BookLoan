@@ -7,4 +7,6 @@ public interface IBookLoanService
 {
     Task<Guid> Create(CreateBookLoanDto dto);
     Task<List<BookLoanResponseDto>> GetAllBookLoansActive();
+    Task<List<BookLoanResponseDto>> GetBookLoanByUserId(Guid userId);
+    Task ReturnBook(Guid bookLoanId);
 }

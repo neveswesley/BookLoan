@@ -44,5 +44,12 @@ public class BookRepository : IBookRepository
         _context.Book.Remove(book);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task ReturnBook(Guid bookId)
+    {
+        var book = await _context.Book.FirstOrDefaultAsync(bl => bl.Id == bookId);
+        _context.Book.Update(book);
+        await _context.SaveChangesAsync();
+    }
 
 }

@@ -34,6 +34,25 @@ namespace BookLoan.API.Controllers
             var result = await _bookLoanService.GetAllBookLoansActive();
             return Ok(result);
         }
-        
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetBookLoanByUserId([FromRoute] Guid userId)
+        {
+            var result = await _bookLoanService.GetBookLoanByUserId(userId);
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPut("{bookLoanId}")]
+        public async Task<IActionResult> ReturnBook([FromRoute] Guid bookLoanId)
+        {
+            await _bookLoanService.ReturnBook(bookLoanId);
+            return NoContent();
+        }
     }
 }

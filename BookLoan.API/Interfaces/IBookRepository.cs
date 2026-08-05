@@ -9,4 +9,5 @@ public interface IBookRepository
     Task<Book> GetById(Guid bookId);
     Task Update(Guid bookId);
     Task Delete(Guid bookId);
+    Task ReturnBook(Guid bookLoanId);
 }

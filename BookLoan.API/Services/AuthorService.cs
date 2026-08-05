@@ -1,5 +1,6 @@
 ﻿using BookLoan.API.DTOs;
 using BookLoan.API.Entities;
+using BookLoan.API.ExceptionsBase;
 using BookLoan.API.Interfaces;
 using BookLoan.API.Repository;
 using BookLoan.API.Validations.Book;
@@ -25,6 +26,10 @@ public class AuthorService : IAuthorService
     public async Task<AuthorResponseDto?> GetById(Guid authorId)
     {
         var author = await _repository.GetById(authorId);
+
+        if (author == null)
+            throw new NotFoundException(["Author not found."]);
+        
         return new AuthorResponseDto()
         {
             Name = author.Name,
